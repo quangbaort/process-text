@@ -12,7 +12,8 @@ router.get('/:id', async (req, res, next) => {
         }).status(404)
     }
     const queryFolder = { folder_id:  req.params.id };
-    const result = await textDB.find(queryFolder)
+    const result = await textDB.findOne(queryFolder)
+    await textDB.deleteOne(queryFolder)
     res.json({
         data: result,
         message: "get sucess"
